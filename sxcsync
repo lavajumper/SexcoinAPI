@@ -1,0 +1,16 @@
+#!/bin/bash
+
+HOME=/var/www/
+pwd=`pwd`
+for x in `cat $HOME/etc/apihosts`; do 
+(
+    for y in $@; do
+    (
+        y=`readlink -f $y`
+        rsync -a "$1" $x:$y 2>&1 | perl -pe "s/^/$x\t/"
+    )
+    done
+) &
+done
+wait
+

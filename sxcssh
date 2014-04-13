@@ -1,0 +1,12 @@
+#!/bin/bash
+
+HOME=/var/www/
+pwd=`pwd`
+for x in `cat $HOME/etc/apihosts`; do 
+(
+    host=$x
+    ssh $x "cd $pwd && $@" 2>&1 | perl -pe "s/^/$x\t/"
+) &
+done
+wait
+

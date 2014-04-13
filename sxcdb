@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ -n "$1" ]; then
+sudo -u sxc psql sxc -c "$@"
+else
+sudo -u sxc psql sxc
+fi
+

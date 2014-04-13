@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd /var/www/
+exec >> log/hourly.log 2>&1
+
+coin/debug.log
+
+# reset if needed?
+[ "`find coin/debug.log -mmin +20`" ] && bin/start-sxc
+
